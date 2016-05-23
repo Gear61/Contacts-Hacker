@@ -24,4 +24,10 @@
     <string name="name_5">Name 5</string>
     <string name="change_contacts">Change Contacts</string>
     <string name="our_suggestions">Our Suggestions</string>
+    <string name="no_names">Your grab bag needs to have at least 1 name in it.</string>
+
+    <!-- Our Suggestions -->
+    <string name="suggestions_intro">
+        Simply click on any one of the preset lists below to use it as your \"grab bag\".
+    </string>
 </resources>

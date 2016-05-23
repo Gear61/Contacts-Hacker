@@ -1,4 +1,4 @@
-package com.randomappsinc.contactshacker;
+package com.randomappsinc.contactshacker.Utils;
 
 import android.app.Application;
 import android.content.Context;

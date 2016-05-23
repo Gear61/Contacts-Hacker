@@ -1,4 +1,4 @@
-package com.randomappsinc.contactshacker;
+package com.randomappsinc.contactshacker.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import com.randomappsinc.contactshacker.R;
 
 /**
  * Created by alexanderchiou on 5/20/16.

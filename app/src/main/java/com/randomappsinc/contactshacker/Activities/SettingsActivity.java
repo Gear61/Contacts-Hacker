@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.randomappsinc.contactshacker.Adapters.SettingsAdapter;
 import com.randomappsinc.contactshacker.R;
-import com.randomappsinc.contactshacker.SettingsAdapter;
-import com.randomappsinc.contactshacker.UIUtils;
+import com.randomappsinc.contactshacker.Utils.UIUtils;
 
 import butterknife.Bind;
 import butterknife.BindString;

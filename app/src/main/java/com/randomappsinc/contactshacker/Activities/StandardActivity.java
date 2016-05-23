@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.randomappsinc.contactshacker.R;
-import com.randomappsinc.contactshacker.UIUtils;
+import com.randomappsinc.contactshacker.Utils.UIUtils;
 
 /**
  * Created by alexanderchiou on 5/20/16.

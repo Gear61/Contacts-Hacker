@@ -1,4 +1,4 @@
-package com.randomappsinc.contactshacker;
+package com.randomappsinc.contactshacker.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
+import com.randomappsinc.contactshacker.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

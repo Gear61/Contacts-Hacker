@@ -27,5 +27,11 @@
             android:label="@string/settings"
             android:configChanges="orientation|screenSize">
         </activity>
+        <activity
+            android:name=".Activities.GrabBagActivity"
+            android:label="@string/grab_bag"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
     </application>
 </manifest>

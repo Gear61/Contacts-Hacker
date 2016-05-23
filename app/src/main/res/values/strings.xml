@@ -2,13 +2,26 @@
     <string name="app_name">Contacts Hacker</string>
     <string name="settings">Settings</string>
 
-    <string name="intro">
+    <string name="app_intro">
         This is the Contacts Hacker App.
-        It changes all of the contacts on this phone\'s contact list
+        It changes all of the contacts on this device\'s contact list
         into whatever you want; for example, \"Batman\".
     </string>
-    <string name="single_name">Change all contacts into 1 name</string>
-    <string name="scramble">Scramble contacts</string>
-    <string name="grab_bag">Grab bag fun time</string>
-    <string name="undo_changes">Undo changes</string>
+    <string name="single_name">Change All Contacts Into 1 Name</string>
+    <string name="scramble">Scramble Contacts</string>
+    <string name="grab_bag">Grab Bag Fun Time</string>
+    <string name="undo_changes">Undo Changes</string>
+
+    <!-- Grab bag -->
+    <string name="grab_bag_intro">
+        Here, you can rename each of the contacts on this device
+        to a random name from your \"grab bag\" below.
+    </string>
+    <string name="name_1">Name 1</string>
+    <string name="name_2">Name 2</string>
+    <string name="name_3">Name 3</string>
+    <string name="name_4">Name 4</string>
+    <string name="name_5">Name 5</string>
+    <string name="change_contacts">Change Contacts</string>
+    <string name="our_suggestions">Our Suggestions</string>
 </resources>

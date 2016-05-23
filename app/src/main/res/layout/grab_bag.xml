@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/grab_bag_intro"
+                style="@style/intro_text"/>
+
+            <EditText
+                android:id="@+id/name_1"
+                android:hint="@string/name_1"
+                style="@style/text_input"/>
+
+            <EditText
+                android:id="@+id/name_2"
+                android:hint="@string/name_2"
+                style="@style/text_input"/>
+
+            <EditText
+                android:id="@+id/name_3"
+                android:hint="@string/name_3"
+                style="@style/text_input"/>
+
+            <EditText
+                android:id="@+id/name_4"
+                android:hint="@string/name_4"
+                style="@style/text_input"/>
+
+            <EditText
+                android:id="@+id/name_5"
+                android:hint="@string/name_5"
+                android:imeOptions="actionDone"
+                style="@style/text_input"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/change_contacts"
+                android:text="@string/change_contacts"
+                style="@style/ripple_button_style"
+                app:rd_style="@style/button_ripple_attributes"/>
+
+            <com.rey.material.widget.Button
+                android:id="@+id/our_suggestions"
+                android:text="@string/our_suggestions"
+                style="@style/ripple_button_style"
+                app:rd_style="@style/button_ripple_attributes"/>
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

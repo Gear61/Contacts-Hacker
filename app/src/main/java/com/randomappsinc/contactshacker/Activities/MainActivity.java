@@ -9,11 +9,30 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 import com.randomappsinc.contactshacker.R;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends StandardActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.single_name)
+    public void singleName() {
+
+    }
+
+    @OnClick(R.id.scramble)
+    public void scramble() {
+
+    }
+
+    @OnClick(R.id.grab_bag)
+    public void grabBag() {
+        startActivity(new Intent(this, GrabBagActivity.class));
     }
 
     @Override

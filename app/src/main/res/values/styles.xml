@@ -10,7 +10,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/ripple_button</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
     <style name="button_ripple_attributes">
@@ -20,5 +20,24 @@
         <item name="rd_maxRippleRadius">match_view</item>
         <item name="rd_rippleAnimDuration">@integer/shorter_anim_length</item>
         <item name="rd_delayClick">untilRelease</item>
+    </style>
+
+    <style name="intro_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="text_input">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:background">@drawable/text_input_border</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">actionNext</item>
     </style>
 </resources>

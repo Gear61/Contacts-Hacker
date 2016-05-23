@@ -1,41 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:background="@color/white">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/intro"
-        android:textColor="@color/dark_gray"
-        android:textSize="22sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <com.rey.material.widget.Button
-        android:id="@+id/single_name"
-        android:text="@string/single_name"
-        style="@style/ripple_button_style"
-        app:rd_style="@style/button_ripple_attributes"/>
+        <TextView
+            android:text="@string/app_intro"
+            style="@style/intro_text"/>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/scramble"
-        android:text="@string/scramble"
-        style="@style/ripple_button_style"
-        app:rd_style="@style/button_ripple_attributes"/>
+        <com.rey.material.widget.Button
+            android:id="@+id/single_name"
+            android:text="@string/single_name"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/grab_bag"
-        android:text="@string/grab_bag"
-        style="@style/ripple_button_style"
-        app:rd_style="@style/button_ripple_attributes"/>
+        <com.rey.material.widget.Button
+            android:id="@+id/scramble"
+            android:text="@string/scramble"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/undo_changes"
-        android:text="@string/undo_changes"
-        style="@style/ripple_button_style"
-        app:rd_style="@style/button_ripple_attributes"/>
-</LinearLayout>
+        <com.rey.material.widget.Button
+            android:id="@+id/grab_bag"
+            android:text="@string/grab_bag"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/undo_changes"
+            android:text="@string/undo_changes"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

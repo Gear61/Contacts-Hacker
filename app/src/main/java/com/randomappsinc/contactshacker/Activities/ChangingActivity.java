@@ -23,7 +23,7 @@ public class ChangingActivity extends StandardActivity {
 
         progressDialog = new MaterialDialog.Builder(this)
                 .title(R.string.hacking_progress)
-                .title(R.string.changing_contacts)
+                .content(R.string.changing_contacts)
                 .progress(false, 100, true)
                 .cancelable(false)
                 .build();

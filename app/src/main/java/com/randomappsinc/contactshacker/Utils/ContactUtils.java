@@ -143,6 +143,7 @@ public class ContactUtils {
         String screen = MainActivity.LOG_TAG;
 
         List<Contact> currentContacts = FileUtils.getContactsFromBackup();
+        EventBus.getDefault().post(new ProgressEvent(screen, ProgressEvent.SET_MAX, currentContacts.size()));
 
         // This loop changes all of the contacts
         for (Contact contact: currentContacts) {

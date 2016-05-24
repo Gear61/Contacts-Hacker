@@ -149,14 +149,6 @@ public class MainActivity extends ChangingActivity {
         }
     }
 
-    @Subscribe
-    public void onEvent(SnackbarEvent event) {
-        if (event.getScreen().equals(LOG_TAG)) {
-            progressDialog.dismiss();
-            UIUtils.showSnackbar(parent, event.getMessage());
-        }
-    }
-
     @OnClick(R.id.scramble)
     public void scramble() {
         restoreDialog(R.string.hacking_progress, R.string.changing_contacts);
@@ -199,6 +191,14 @@ public class MainActivity extends ChangingActivity {
         progressDialog.setContent(content);
         progressDialog.setProgress(0);
         progressDialog.show();
+    }
+
+    @Subscribe
+    public void onEvent(SnackbarEvent event) {
+        if (event.getScreen().equals(LOG_TAG)) {
+            progressDialog.dismiss();
+            UIUtils.showSnackbar(parent, event.getMessage());
+        }
     }
 
     @Override

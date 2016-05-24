@@ -17,9 +17,8 @@
         We were unable to change this device\'s contacts list.
         Please make sure that it has all the proper permissions.
     </string>
-    <string name="contacts_success">
-        Contacts successfully changed.
-    </string>
+    <string name="contacts_success">Contacts successfully changed.</string>
+    <string name="contacts_repaired">Contacts list successfully restored.</string>
 
     <string name="write_contacts_explanation">
         In order for this app to work, you need to allow us to change the device\'s contacts.
@@ -59,6 +58,8 @@
     <!-- Contacts changing -->
     <string name="hacking_progress">Hacking Progress</string>
     <string name="changing_contacts">Changing contacts&#8230;</string>
+    <string name="repair_progress">Repair Progress</string>
+    <string name="restoring_contacts">Restoring contacts&#8230;</string>
 
     <!-- Single name -->
     <string name="name">Name</string>

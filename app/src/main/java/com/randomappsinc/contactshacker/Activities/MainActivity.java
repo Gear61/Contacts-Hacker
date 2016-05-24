@@ -134,8 +134,7 @@ public class MainActivity extends ChangingActivity {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         newName = dialog.getInputEditText().getText().toString().trim();
-                        progressDialog.setProgress(0);
-                        progressDialog.show();
+                        restoreDialog(R.string.hacking_progress, R.string.changing_contacts);
                         new ChangeToSingleName().execute();
                     }
                 })
@@ -150,14 +149,6 @@ public class MainActivity extends ChangingActivity {
         }
     }
 
-    private class ScrambleContacts extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            ContactUtils.scrambleContacts();
-            return null;
-        }
-    }
-
     @Subscribe
     public void onEvent(SnackbarEvent event) {
         if (event.getScreen().equals(LOG_TAG)) {
@@ -168,9 +159,16 @@ public class MainActivity extends ChangingActivity {
 
     @OnClick(R.id.scramble)
     public void scramble() {
-        progressDialog.setProgress(0);
-        progressDialog.show();
+        restoreDialog(R.string.hacking_progress, R.string.changing_contacts);
         new ScrambleContacts().execute();
+    }
+
+    private class ScrambleContacts extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            ContactUtils.scrambleContacts();
+            return null;
+        }
     }
 
     @OnClick(R.id.grab_bag)
@@ -181,10 +179,26 @@ public class MainActivity extends ChangingActivity {
     @OnClick(R.id.undo_changes)
     public void undoChanges() {
         if (FileUtils.doesBackupExist()) {
-
+            restoreDialog(R.string.repair_progress, R.string.restoring_contacts);
+            new RepairContacts().execute();
         } else {
             UIUtils.showSnackbar(parent, getString(R.string.no_changes));
         }
+    }
+
+    private class RepairContacts extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            ContactUtils.repairContacts();
+            return null;
+        }
+    }
+
+    private void restoreDialog(int title, int content) {
+        progressDialog.setTitle(title);
+        progressDialog.setContent(content);
+        progressDialog.setProgress(0);
+        progressDialog.show();
     }
 
     @Override

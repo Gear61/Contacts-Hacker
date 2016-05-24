@@ -78,6 +78,7 @@ public class ContactUtils {
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.READ_CONTACTS) ||
             !PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
             EventBus.getDefault().post(new SnackbarEvent(screen, context.getString(R.string.contacts_error)));
+            return;
         }
 
         List<Contact> currentContacts = getCurrentContacts();
@@ -107,6 +108,7 @@ public class ContactUtils {
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.READ_CONTACTS) ||
                 !PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
             EventBus.getDefault().post(new SnackbarEvent(screen, context.getString(R.string.contacts_error)));
+            return;
         }
 
         List<Contact> currentContacts = getCurrentContacts();
@@ -134,5 +136,20 @@ public class ContactUtils {
 
             EventBus.getDefault().post(new SnackbarEvent(screen, context.getString(R.string.contacts_success)));
         }
+    }
+
+    public static void repairContacts() {
+        Context context = MyApplication.getAppContext();
+        String screen = MainActivity.LOG_TAG;
+
+        List<Contact> currentContacts = FileUtils.getContactsFromBackup();
+
+        // This loop changes all of the contacts
+        for (Contact contact: currentContacts) {
+            changeContact(contact.getId(), contact.getDisplayName(), screen);
+        }
+
+        FileUtils.deleteBackup();
+        EventBus.getDefault().post(new SnackbarEvent(screen, context.getString(R.string.contacts_repaired)));
     }
 }

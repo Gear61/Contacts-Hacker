@@ -8,8 +8,13 @@ import com.randomappsinc.contactshacker.Contact;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,5 +68,48 @@ public class FileUtils {
             return true;
         }
         return false;
+    }
+
+    public static String convertStreamToString(InputStream is) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            reader.close();
+            return sb.toString();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static List<Contact> getContactsFromBackup() {
+        List<Contact> contacts = new ArrayList<>();
+
+        try {
+            File backup = new File(Environment.getExternalStorageDirectory().getPath() + "/ContactsHacker", "backup.txt");
+            FileInputStream fileInputStream = new FileInputStream(backup);
+            String contactsText = convertStreamToString(fileInputStream);
+
+            JSONObject backupJson = new JSONObject(contactsText);
+            JSONArray contactsArray = backupJson.getJSONArray(CONTACTS_KEY);
+            for (int i = 0; i < contactsArray.length(); i++) {
+                Contact contact = new Contact();
+                contact.setId(contactsArray.getJSONObject(i).getString(ID_KEY));
+                contact.setDisplayName(contactsArray.getJSONObject(i).getString(DISPLAY_NAME_KEY));
+                contacts.add(contact);
+            }
+
+            fileInputStream.close();
+        } catch (Exception ignored) {}
+
+        return contacts;
+    }
+
+    public static void deleteBackup() {
+        File backup = new File(Environment.getExternalStorageDirectory().getPath() + "/ContactsHacker", "backup.txt");
+        backup.delete();
     }
 }

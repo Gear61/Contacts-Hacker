@@ -67,7 +67,7 @@ public class GroupServer {
         return instance;
     }
 
-    public List<String> getList(String listName) {
+    public List<String> getNamesInList(String listName) {
         return mappings.get(listName);
     }
 

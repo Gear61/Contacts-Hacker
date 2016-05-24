@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -84,7 +85,26 @@ public class MainActivity extends StandardActivity {
 
     @OnClick(R.id.single_name)
     public void singleName() {
+        new MaterialDialog.Builder(this)
+                .content(R.string.single_name_body)
+                .alwaysCallInputCallback()
+                .inputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME)
+                .input(getString(R.string.name), "", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        dialog.getActionButton(DialogAction.POSITIVE)
+                                .setEnabled(!input.toString().trim().isEmpty());
+                    }
+                })
+                .positiveText(R.string.change)
+                .negativeText(android.R.string.no)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
+                    }
+                })
+                .show();
     }
 
     @OnClick(R.id.scramble)

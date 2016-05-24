@@ -11,6 +11,8 @@
     <string name="scramble">Scramble Contacts</string>
     <string name="grab_bag">Grab Bag Fun Time</string>
     <string name="undo_changes">Undo Changes</string>
+    <string name="no_changes">There are no changes to undo.</string>
+    <string name="change">Change</string>
 
     <string name="write_external_explanation">
         This app backs up contacts by writing them to an external file,
@@ -35,5 +37,19 @@
     <!-- Our Suggestions -->
     <string name="suggestions_intro">
         Simply click on any one of the preset lists below to use it as your \"grab bag\".
+    </string>
+    <string name="are_you_sure">
+        Are you sure that you want to rename each of the contacts on this device
+        to a randomly selected member of the \"
+    </string>
+
+    <!-- Contacts changing -->
+    <string name="hacking_progress">Hacking Progress</string>
+    <string name="changing_contacts">Changing contacts&#8230;</string>
+
+    <!-- Single name -->
+    <string name="name">Name</string>
+    <string name="single_name_body">
+        Enter in the name you want to change all of this device\'s contacts into.
     </string>
 </resources>

@@ -3,6 +3,7 @@ package com.randomappsinc.contactshacker.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.InputType;
@@ -14,22 +15,31 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
+import com.randomappsinc.contactshacker.Models.ProgressEvent;
+import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.ContactUtils;
 import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends StandardActivity {
+    public static final String LOG_TAG = "MainActivity";
     public static final int WRITE_CONTACTS_CODE = 1;
     public static final int READ_CONTACTS_CODE = 2;
     public static final int WRITE_EXTERNAL_CODE = 3;
 
     @Bind(R.id.parent) View parent;
+
+    private MaterialDialog progressDialog;
+    private String newName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,7 @@ public class MainActivity extends StandardActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
             processPermission(R.string.write_contacts_explanation,
@@ -55,6 +66,13 @@ public class MainActivity extends StandardActivity {
             processPermission(R.string.write_external_explanation,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
         }
+
+        progressDialog = new MaterialDialog.Builder(this)
+                .title(R.string.hacking_progress)
+                .content(R.string.changing_contacts)
+                .progress(false, 100, true)
+                .cancelable(false)
+                .build();
     }
 
     private void askForPermission(String permission, int code) {
@@ -124,16 +142,44 @@ public class MainActivity extends StandardActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        String newName = dialog.getInputEditText().getText().toString().trim();
-                        changeToSingleName(newName);
+                        newName = dialog.getInputEditText().getText().toString().trim();
+                        progressDialog.setProgress(0);
+                        progressDialog.show();
+                        new ChangeToSingleName().execute();
                     }
                 })
                 .show();
     }
 
-    private void changeToSingleName(String name) {
-        if (!ContactUtils.changeToOneName(name, this)) {
-            UIUtils.showSnackbar(parent, getString(R.string.contacts_error));
+    private class ChangeToSingleName extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            ContactUtils.changeToOneName(newName);
+            return null;
+        }
+    }
+
+    @Subscribe
+    public void onEvent(ProgressEvent event) {
+        if (event.getScreen().equals(LOG_TAG)) {
+            switch (event.getEventType()) {
+                case ProgressEvent.SET_MAX:
+                    progressDialog.setMaxProgress(event.getTotal());
+                    break;
+                case ProgressEvent.INCREMENT:
+                    progressDialog.incrementProgress(1);
+                    break;
+                case ProgressEvent.FINISHED:
+                    progressDialog.dismiss();
+                    UIUtils.showSnackbar(parent, getString(R.string.contacts_success));
+            }
+        }
+    }
+
+    @Subscribe
+    public void onEvent(SnackbarEvent event) {
+        if (event.getScreen().equals(LOG_TAG)) {
+            UIUtils.showSnackbar(parent, event.getMessage());
         }
     }
 
@@ -154,6 +200,12 @@ public class MainActivity extends StandardActivity {
         } else {
             UIUtils.showSnackbar(parent, getString(R.string.no_changes));
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

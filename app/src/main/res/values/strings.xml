@@ -17,6 +17,9 @@
         We were unable to change this device\'s contacts list.
         Please make sure that it has all the proper permissions.
     </string>
+    <string name="contacts_success">
+        Contacts successfully changed.
+    </string>
 
     <string name="write_contacts_explanation">
         In order for this app to work, you need to allow us to change the device\'s contacts.

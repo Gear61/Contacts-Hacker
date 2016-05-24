@@ -89,7 +89,7 @@ public class ContactUtils {
                 catch (Exception ignored) {}
             }
 
-            EventBus.getDefault().post(new ProgressEvent(screen, ProgressEvent.FINISHED, 0));
+            EventBus.getDefault().post(new SnackbarEvent(screen, context.getString(R.string.contacts_success)));
         }
     }
 

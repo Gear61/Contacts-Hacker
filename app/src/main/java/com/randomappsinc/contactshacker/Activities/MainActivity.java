@@ -15,7 +15,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
-import com.randomappsinc.contactshacker.Models.ProgressEvent;
 import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.ContactUtils;
@@ -23,14 +22,13 @@ import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends StandardActivity {
+public class MainActivity extends ChangingActivity {
     public static final String LOG_TAG = "MainActivity";
     public static final int WRITE_CONTACTS_CODE = 1;
     public static final int READ_CONTACTS_CODE = 2;
@@ -38,7 +36,6 @@ public class MainActivity extends StandardActivity {
 
     @Bind(R.id.parent) View parent;
 
-    private MaterialDialog progressDialog;
     private String newName;
 
     @Override
@@ -52,9 +49,10 @@ public class MainActivity extends StandardActivity {
             return;
         }
 
+        logTag = LOG_TAG;
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
 
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
             processPermission(R.string.write_contacts_explanation,
@@ -66,13 +64,6 @@ public class MainActivity extends StandardActivity {
             processPermission(R.string.write_external_explanation,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
         }
-
-        progressDialog = new MaterialDialog.Builder(this)
-                .title(R.string.hacking_progress)
-                .content(R.string.changing_contacts)
-                .progress(false, 100, true)
-                .cancelable(false)
-                .build();
     }
 
     private void askForPermission(String permission, int code) {
@@ -160,25 +151,9 @@ public class MainActivity extends StandardActivity {
     }
 
     @Subscribe
-    public void onEvent(ProgressEvent event) {
-        if (event.getScreen().equals(LOG_TAG)) {
-            switch (event.getEventType()) {
-                case ProgressEvent.SET_MAX:
-                    progressDialog.setMaxProgress(event.getTotal());
-                    break;
-                case ProgressEvent.INCREMENT:
-                    progressDialog.incrementProgress(1);
-                    break;
-                case ProgressEvent.FINISHED:
-                    progressDialog.dismiss();
-                    UIUtils.showSnackbar(parent, getString(R.string.contacts_success));
-            }
-        }
-    }
-
-    @Subscribe
     public void onEvent(SnackbarEvent event) {
         if (event.getScreen().equals(LOG_TAG)) {
+            progressDialog.dismiss();
             UIUtils.showSnackbar(parent, event.getMessage());
         }
     }
@@ -200,12 +175,6 @@ public class MainActivity extends StandardActivity {
         } else {
             UIUtils.showSnackbar(parent, getString(R.string.no_changes));
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override

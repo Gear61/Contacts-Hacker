@@ -6,7 +6,6 @@ package com.randomappsinc.contactshacker.Models;
 public class ProgressEvent {
     public static final String SET_MAX = "setMax";
     public static final String INCREMENT = "increment";
-    public static final String FINISHED = "finished";
 
     private String screen;
     private String eventType;

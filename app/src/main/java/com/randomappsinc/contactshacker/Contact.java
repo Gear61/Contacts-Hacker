@@ -7,11 +7,6 @@ public class Contact {
     private String id;
     private String displayName;
 
-    public Contact(String id, String displayName) {
-        this.id = id;
-        this.displayName = displayName;
-    }
-
     public String getDisplayName() {
         return displayName;
     }

@@ -8,5 +8,6 @@
 
     <TextView
         android:id="@+id/suggestion"
+        android:textSize="21sp"
         style="@style/intro_text"/>
 </LinearLayout>

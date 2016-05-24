@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 import com.randomappsinc.contactshacker.R;
+import com.randomappsinc.contactshacker.Utils.ContactUtils;
 import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
@@ -25,7 +26,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends StandardActivity {
     public static final int WRITE_CONTACTS_CODE = 1;
-    public static final int WRITE_EXTERNAL_CODE = 2;
+    public static final int READ_CONTACTS_CODE = 2;
+    public static final int WRITE_EXTERNAL_CODE = 3;
 
     @Bind(R.id.parent) View parent;
 
@@ -44,32 +46,33 @@ public class MainActivity extends StandardActivity {
         ButterKnife.bind(this);
 
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
-            PermissionUtils.requestPermission(this, Manifest.permission.WRITE_CONTACTS, WRITE_CONTACTS_CODE);
+            processPermission(R.string.write_contacts_explanation,
+                    Manifest.permission.WRITE_CONTACTS, WRITE_CONTACTS_CODE);
+        } else if (!PermissionUtils.isPermissionGranted(Manifest.permission.READ_CONTACTS)) {
+            processPermission(R.string.read_contacts_explanation,
+                    Manifest.permission.READ_CONTACTS, READ_CONTACTS_CODE);
         } else if (!PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            processWrite();
+            processPermission(R.string.write_external_explanation,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
         }
     }
 
-    private void askForWrite() {
-        PermissionUtils.requestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
+    private void askForPermission(String permission, int code) {
+        PermissionUtils.requestPermission(this, permission, code);
     }
 
-    private void processWrite() {
-        if (PermissionUtils.shouldShowExplanation(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            new MaterialDialog.Builder(this)
-                    .content(R.string.write_external_explanation)
-                    .cancelable(false)
-                    .positiveText(android.R.string.yes)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            askForWrite();
-                        }
-                    })
-                    .show();
-        } else {
-            askForWrite();
-        }
+    private void processPermission(int body, final String permission, final int code) {
+        new MaterialDialog.Builder(this)
+                .content(body)
+                .positiveText(android.R.string.yes)
+                .cancelable(false)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        askForPermission(permission, code);
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -77,16 +80,28 @@ public class MainActivity extends StandardActivity {
         switch (requestCode) {
             case WRITE_CONTACTS_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    processWrite();
+                    processPermission(R.string.read_contacts_explanation,
+                            Manifest.permission.READ_CONTACTS, READ_CONTACTS_CODE);
                 } else {
-                    PermissionUtils.requestPermission(this, Manifest.permission.WRITE_CONTACTS, WRITE_CONTACTS_CODE);
+                    processPermission(R.string.write_contacts_explanation,
+                            Manifest.permission.WRITE_CONTACTS, WRITE_CONTACTS_CODE);
+                }
+                break;
+            case READ_CONTACTS_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    processPermission(R.string.write_external_explanation,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
+                } else {
+                    processPermission(R.string.read_contacts_explanation,
+                            Manifest.permission.READ_CONTACTS, READ_CONTACTS_CODE);
                 }
                 break;
             case WRITE_EXTERNAL_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     FileUtils.createExternalDirectory();
                 } else {
-                    processWrite();
+                    processPermission(R.string.write_external_explanation,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_CODE);
                 }
         }
     }
@@ -109,10 +124,17 @@ public class MainActivity extends StandardActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
+                        String newName = dialog.getInputEditText().getText().toString().trim();
+                        changeToSingleName(newName);
                     }
                 })
                 .show();
+    }
+
+    private void changeToSingleName(String name) {
+        if (!ContactUtils.changeToOneName(name, this)) {
+            UIUtils.showSnackbar(parent, getString(R.string.contacts_error));
+        }
     }
 
     @OnClick(R.id.scramble)

@@ -13,7 +13,17 @@
     <string name="undo_changes">Undo Changes</string>
     <string name="no_changes">There are no changes to undo.</string>
     <string name="change">Change</string>
+    <string name="contacts_error">
+        We were unable to change this device\'s contacts list.
+        Please make sure that it has all the proper permissions.
+    </string>
 
+    <string name="write_contacts_explanation">
+        In order for this app to work, you need to allow us to change the device\'s contacts.
+    </string>
+    <string name="read_contacts_explanation">
+        In order for this app to back up contacts, you need to allow us to read the device\'s contact information.
+    </string>
     <string name="write_external_explanation">
         This app backs up contacts by writing them to an external file,
         which allows it to undo its changes even if it\'s uninstalled.

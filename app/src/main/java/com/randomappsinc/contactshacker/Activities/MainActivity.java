@@ -150,6 +150,14 @@ public class MainActivity extends ChangingActivity {
         }
     }
 
+    private class ScrambleContacts extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            ContactUtils.scrambleContacts();
+            return null;
+        }
+    }
+
     @Subscribe
     public void onEvent(SnackbarEvent event) {
         if (event.getScreen().equals(LOG_TAG)) {
@@ -160,7 +168,9 @@ public class MainActivity extends ChangingActivity {
 
     @OnClick(R.id.scramble)
     public void scramble() {
-
+        progressDialog.setProgress(0);
+        progressDialog.show();
+        new ScrambleContacts().execute();
     }
 
     @OnClick(R.id.grab_bag)

@@ -3,6 +3,8 @@
         <item name="colorPrimary">@color/app_gray</item>
         <item name="colorPrimaryDark">@color/dark_blue_gray</item>
         <item name="colorAccent">@color/app_gray</item>
+        <item name="md_positive_color">@color/blue</item>
+        <item name="md_negative_color">@color/blue</item>
     </style>
 
     <style name="ripple_button_style">

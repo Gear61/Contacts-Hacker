@@ -12,6 +12,12 @@
     <string name="grab_bag">Grab Bag Fun Time</string>
     <string name="undo_changes">Undo Changes</string>
 
+    <string name="write_external_explanation">
+        This app backs up contacts by writing them to an external file,
+        which allows it to undo its changes even if it\'s uninstalled.
+        In order for this to happen, you need to give us access to this device\'s external storage.
+    </string>
+
     <!-- Grab bag -->
     <string name="grab_bag_intro">
         Here, you can rename each of the contacts on this device

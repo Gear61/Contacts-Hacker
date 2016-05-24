@@ -17,6 +17,7 @@ public final class MyApplication extends Application {
         super.onCreate();
         Iconify.with(new IoniconsModule());
         instance = getApplicationContext();
+        FileUtils.createExternalDirectory();
     }
 
     public static Context getAppContext() {

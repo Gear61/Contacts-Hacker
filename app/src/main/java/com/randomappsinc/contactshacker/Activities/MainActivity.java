@@ -8,20 +8,26 @@ import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
 import com.randomappsinc.contactshacker.R;
+import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
+import com.randomappsinc.contactshacker.Utils.UIUtils;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends StandardActivity {
     public static final int WRITE_CONTACTS_CODE = 1;
     public static final int WRITE_EXTERNAL_CODE = 2;
+
+    @Bind(R.id.parent) View parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +83,9 @@ public class MainActivity extends StandardActivity {
                 }
                 break;
             case WRITE_EXTERNAL_CODE:
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    FileUtils.createExternalDirectory();
+                } else {
                     processWrite();
                 }
         }
@@ -115,6 +123,15 @@ public class MainActivity extends StandardActivity {
     @OnClick(R.id.grab_bag)
     public void grabBag() {
         startActivity(new Intent(this, GrabBagActivity.class));
+    }
+
+    @OnClick(R.id.undo_changes)
+    public void undoChanges() {
+        if (FileUtils.doesBackupExist()) {
+
+        } else {
+            UIUtils.showSnackbar(parent, getString(R.string.no_changes));
+        }
     }
 
     @Override

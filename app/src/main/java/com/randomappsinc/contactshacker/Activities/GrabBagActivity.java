@@ -6,18 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.ContactUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -35,9 +31,7 @@ public class GrabBagActivity extends ChangingActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logTag = LOG_TAG;
-
-        setContentView(R.layout.grab_bag);
-        ButterKnife.bind(this);
+        setUpLayout(R.layout.grab_bag);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -72,13 +66,5 @@ public class GrabBagActivity extends ChangingActivity {
     @OnClick(R.id.our_suggestions)
     public void ourSuggestions() {
         startActivity(new Intent(this, SuggestionsActivity.class));
-    }
-
-    @Subscribe
-    public void onEvent(SnackbarEvent event) {
-        if (event.getScreen().equals(LOG_TAG)) {
-            progressDialog.dismiss();
-            UIUtils.showSnackbar(parent, event.getMessage());
-        }
     }
 }

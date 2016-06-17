@@ -15,17 +15,13 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.IoniconsIcons;
-import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.ContactUtils;
 import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends ChangingActivity {
@@ -50,9 +46,7 @@ public class MainActivity extends ChangingActivity {
         }
 
         logTag = LOG_TAG;
-
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        setUpLayout(R.layout.activity_main);
 
         if (!PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_CONTACTS)) {
             processPermission(R.string.write_contacts_explanation,
@@ -191,14 +185,6 @@ public class MainActivity extends ChangingActivity {
         progressDialog.setContent(content);
         progressDialog.setProgress(0);
         progressDialog.show();
-    }
-
-    @Subscribe
-    public void onEvent(SnackbarEvent event) {
-        if (event.getScreen().equals(LOG_TAG)) {
-            progressDialog.dismiss();
-            UIUtils.showSnackbar(parent, event.getMessage());
-        }
     }
 
     @Override

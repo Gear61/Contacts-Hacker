@@ -3,24 +3,18 @@ package com.randomappsinc.contactshacker.Activities;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.ListView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.randomappsinc.contactshacker.Adapters.SuggestionsAdapter;
-import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.ContactUtils;
 import com.randomappsinc.contactshacker.Utils.GroupServer;
-import com.randomappsinc.contactshacker.Utils.UIUtils;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
 /**
@@ -29,7 +23,6 @@ import butterknife.OnItemClick;
 public class SuggestionsActivity extends ChangingActivity {
     public static final String LOG_TAG = "SuggestionsActivity";
 
-    @Bind(R.id.parent) View parent;
     @Bind(R.id.suggestions) ListView suggestions;
 
     private SuggestionsAdapter suggestionsAdapter;
@@ -40,8 +33,7 @@ public class SuggestionsActivity extends ChangingActivity {
         super.onCreate(savedInstanceState);
         logTag = LOG_TAG;
 
-        setContentView(R.layout.our_suggestions);
-        ButterKnife.bind(this);
+        setUpLayout(R.layout.our_suggestions);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         suggestionsAdapter = new SuggestionsAdapter(this);
@@ -73,14 +65,6 @@ public class SuggestionsActivity extends ChangingActivity {
             List<String> grabBag = GroupServer.getInstance().getNamesInList(selectedList);
             ContactUtils.changeContacts(grabBag, LOG_TAG);
             return null;
-        }
-    }
-
-    @Subscribe
-    public void onEvent(SnackbarEvent event) {
-        if (event.getScreen().equals(LOG_TAG)) {
-            progressDialog.dismiss();
-            UIUtils.showSnackbar(parent, event.getMessage());
         }
     }
 }

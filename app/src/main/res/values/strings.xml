@@ -67,4 +67,6 @@
     <string name="single_name_body">
         Enter in the name you want to change all of this device\'s contacts into.
     </string>
+
+    <string name="view_contacts">View contacts</string>
 </resources>

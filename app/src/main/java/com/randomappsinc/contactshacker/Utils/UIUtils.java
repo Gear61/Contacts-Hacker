@@ -51,7 +51,7 @@ public class UIUtils {
                 intent.setAction("android.intent.action.MAIN");
                 intent.addCategory("android.intent.category.LAUNCHER");
                 intent.addCategory("android.intent.category.DEFAULT");
-                context.startActivity(intent);
+                context.startActivity(Intent.createChooser(intent, context.getString(R.string.view_contacts)));
             }
         });
         snackbar.setActionTextColor(Color.WHITE);

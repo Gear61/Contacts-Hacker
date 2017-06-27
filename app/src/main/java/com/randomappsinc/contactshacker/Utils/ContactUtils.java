@@ -29,7 +29,7 @@ public class ContactUtils {
         changeContacts(singleName, MainActivity.LOG_TAG);
     }
 
-    public static List<Contact> getCurrentContacts() {
+    private static List<Contact> getCurrentContacts() {
         ContentResolver resolver = MyApplication.getAppContext().getContentResolver();
         final String[] projection = {ContactsContract.RawContacts._ID, ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY};
 
@@ -42,7 +42,8 @@ public class ContactUtils {
             int idColumn = contactsCursor.getColumnIndex(ContactsContract.RawContacts._ID);
             int displayNameColumn = contactsCursor.getColumnIndex(ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY);
             while (contactsCursor.moveToNext()) {
-                if (!contactsCursor.getString(displayNameColumn).equals("null")) {
+                String displayName = contactsCursor.getString(displayNameColumn);
+                if (displayName != null && !displayName.equals("null")) {
                     Contact contact = new Contact();
                     contact.setId(contactsCursor.getString(idColumn));
                     contact.setDisplayName(contactsCursor.getString(displayNameColumn));
@@ -55,7 +56,7 @@ public class ContactUtils {
         return currentContacts;
     }
 
-    public static void changeContact(String id, String newName, String screen) {
+    private static void changeContact(String id, String newName, String screen) {
         // CONTACT UPDATE DONE HERE
         ArrayList<ContentProviderOperation> ops = new ArrayList<>();
         ops.add(ContentProviderOperation

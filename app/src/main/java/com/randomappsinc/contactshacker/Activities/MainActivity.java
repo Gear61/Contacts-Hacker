@@ -21,18 +21,19 @@ import com.randomappsinc.contactshacker.Utils.FileUtils;
 import com.randomappsinc.contactshacker.Utils.PermissionUtils;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends ChangingActivity {
+
     public static final String LOG_TAG = "MainActivity";
     public static final int WRITE_CONTACTS_CODE = 1;
     public static final int READ_CONTACTS_CODE = 2;
     public static final int WRITE_EXTERNAL_CODE = 3;
 
-    @Bind(R.id.parent) View parent;
+    @BindView(R.id.parent) View parent;
 
-    private String newName;
+    private static String newName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +136,7 @@ public class MainActivity extends ChangingActivity {
                 .show();
     }
 
-    private class ChangeToSingleName extends AsyncTask<Void, Void, Void> {
+    private static class ChangeToSingleName extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             ContactUtils.changeToOneName(newName);
@@ -149,7 +150,7 @@ public class MainActivity extends ChangingActivity {
         new ScrambleContacts().execute();
     }
 
-    private class ScrambleContacts extends AsyncTask<Void, Void, Void> {
+    private static class ScrambleContacts extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             ContactUtils.scrambleContacts();
@@ -172,7 +173,7 @@ public class MainActivity extends ChangingActivity {
         }
     }
 
-    private class RepairContacts extends AsyncTask<Void, Void, Void> {
+    private static class RepairContacts extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             ContactUtils.repairContacts();

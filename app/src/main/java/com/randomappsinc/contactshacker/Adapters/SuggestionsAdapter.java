@@ -12,13 +12,11 @@ import com.randomappsinc.contactshacker.Utils.GroupServer;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class SuggestionsAdapter extends BaseAdapter {
+
     private Context context;
     private List<String> suggestions;
 
@@ -43,7 +41,7 @@ public class SuggestionsAdapter extends BaseAdapter {
     }
 
     public class SuggestionViewHolder {
-        @Bind(R.id.suggestion) TextView suggestion;
+        @BindView(R.id.suggestion) TextView suggestion;
 
         public SuggestionViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -62,8 +60,7 @@ public class SuggestionsAdapter extends BaseAdapter {
             view = vi.inflate(R.layout.suggestions_list_item, parent, false);
             holder = new SuggestionViewHolder(view);
             view.setTag(holder);
-        }
-        else {
+        } else {
             holder = (SuggestionViewHolder) view.getTag();
         }
         holder.loadSuggestion(position);

@@ -14,19 +14,17 @@ import com.randomappsinc.contactshacker.Utils.GroupServer;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnItemClick;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class SuggestionsActivity extends ChangingActivity {
+
     public static final String LOG_TAG = "SuggestionsActivity";
 
-    @Bind(R.id.suggestions) ListView suggestions;
+    @BindView(R.id.suggestions) ListView suggestions;
 
     private SuggestionsAdapter suggestionsAdapter;
-    private String selectedList;
+    private static String selectedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class SuggestionsActivity extends ChangingActivity {
                 .show();
     }
 
-    private class GrabBag extends AsyncTask<Void, Void, Void> {
+    private static class GrabBag extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             List<String> grabBag = GroupServer.getInstance().getNamesInList(selectedList);

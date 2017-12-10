@@ -1,9 +1,7 @@
-package com.randomappsinc.contactshacker;
+package com.randomappsinc.contactshacker.Models;
 
-/**
- * Created by alexanderchiou on 5/22/16.
- */
 public class Contact {
+
     private String id;
     private String displayName;
 

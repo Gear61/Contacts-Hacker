@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class GroupServer {
+
     private static GroupServer instance;
     private Map<String, List<String>> mappings;
     private List<String> listNames;
@@ -54,9 +52,7 @@ public class GroupServer {
         mappings.put("3 Musketeers", threeMusketeers);
 
         listNames = new ArrayList<>();
-        for (String listName : mappings.keySet()) {
-            listNames.add(listName);
-        }
+        listNames.addAll(mappings.keySet());
         Collections.sort(listNames);
     }
 

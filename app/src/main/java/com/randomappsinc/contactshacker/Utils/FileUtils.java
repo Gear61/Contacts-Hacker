@@ -3,7 +3,7 @@ package com.randomappsinc.contactshacker.Utils;
 import android.Manifest;
 import android.os.Environment;
 
-import com.randomappsinc.contactshacker.Contact;
+import com.randomappsinc.contactshacker.Models.Contact;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,13 +17,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class FileUtils {
-    public static final String CONTACTS_KEY = "contacts";
-    public static final String ID_KEY = "id";
-    public static final String DISPLAY_NAME_KEY = "displayName";
+
+    private static final String CONTACTS_KEY = "contacts";
+    private static final String ID_KEY = "id";
+    private static final String DISPLAY_NAME_KEY = "displayName";
 
     // Create external storage directory for our app if it doesn't exist
     public static void createExternalDirectory() {
@@ -42,7 +40,7 @@ public class FileUtils {
         return backup.exists();
     }
 
-    public static boolean createBackup(List<Contact> contacts) {
+    static boolean createBackup(List<Contact> contacts) {
         if (PermissionUtils.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             File backup = new File(Environment.getExternalStorageDirectory().getPath() + "/ContactsHacker", "backup.txt");
             if (!backup.exists()) {
@@ -70,7 +68,7 @@ public class FileUtils {
         return false;
     }
 
-    public static String convertStreamToString(InputStream is) {
+    static String convertStreamToString(InputStream is) {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
@@ -85,7 +83,7 @@ public class FileUtils {
         }
     }
 
-    public static List<Contact> getContactsFromBackup() {
+    static List<Contact> getContactsFromBackup() {
         List<Contact> contacts = new ArrayList<>();
 
         try {
@@ -108,7 +106,7 @@ public class FileUtils {
         return contacts;
     }
 
-    public static void deleteBackup() {
+    static void deleteBackup() {
         File backup = new File(Environment.getExternalStorageDirectory().getPath() + "/ContactsHacker", "backup.txt");
         backup.delete();
     }

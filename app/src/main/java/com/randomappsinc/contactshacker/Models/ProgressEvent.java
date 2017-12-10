@@ -1,9 +1,7 @@
 package com.randomappsinc.contactshacker.Models;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class ProgressEvent {
+
     public static final String SET_MAX = "setMax";
     public static final String INCREMENT = "increment";
 
@@ -29,15 +27,7 @@ public class ProgressEvent {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
     public int getTotal() {
         return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 }

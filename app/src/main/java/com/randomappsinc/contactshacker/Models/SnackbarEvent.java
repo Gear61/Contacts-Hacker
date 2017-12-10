@@ -1,9 +1,7 @@
 package com.randomappsinc.contactshacker.Models;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class SnackbarEvent {
+
     private String screen;
     private String message;
 

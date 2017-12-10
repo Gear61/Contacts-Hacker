@@ -10,21 +10,19 @@ import com.randomappsinc.contactshacker.Adapters.SettingsAdapter;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
-import butterknife.Bind;
 import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
-/**
- * Created by alexanderchiou on 5/20/16.
- */
 public class SettingsActivity extends StandardActivity {
+
     public static final String SUPPORT_EMAIL = "chessnone@gmail.com";
     public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/dev?id=9093438553713389916";
     public static final String REPO_URL = "https://github.com/Gear61/Contacts-Hacker";
 
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.settings_options) ListView settingsOptions;
+    @BindView(R.id.parent) View parent;
+    @BindView(R.id.settings_options) ListView settingsOptions;
     @BindString(R.string.feedback_subject) String feedbackSubject;
     @BindString(R.string.send_email) String sendEmail;
 

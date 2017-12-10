@@ -7,10 +7,8 @@ import android.view.MenuItem;
 import com.randomappsinc.contactshacker.R;
 import com.randomappsinc.contactshacker.Utils.UIUtils;
 
-/**
- * Created by alexanderchiou on 5/20/16.
- */
 public class StandardActivity extends AppCompatActivity {
+
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         UIUtils.hideKeyboard(this);

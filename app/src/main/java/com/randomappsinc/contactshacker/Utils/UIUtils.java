@@ -12,22 +12,24 @@ import android.widget.TextView;
 
 import com.randomappsinc.contactshacker.R;
 
-/**
- * Created by alexanderchiou on 5/20/16.
- */
 public class UIUtils {
+
     public static void showSnackbar(View parent, String message) {
         Context context = MyApplication.getAppContext();
         Snackbar snackbar = Snackbar.make(parent, message, Snackbar.LENGTH_LONG);
         View rootView = snackbar.getView();
         snackbar.getView().setBackgroundColor(context.getResources().getColor(R.color.app_gray));
-        TextView tv = (TextView) rootView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView tv = rootView.findViewById(android.support.design.R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
         snackbar.show();
     }
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager == null) {
+            return;
+        }
+
         View view = activity.getCurrentFocus();
         if (view == null) {
             view = new View(activity);
@@ -40,7 +42,7 @@ public class UIUtils {
                 Snackbar.LENGTH_INDEFINITE);
         View rootView = snackbar.getView();
         snackbar.getView().setBackgroundColor(context.getResources().getColor(R.color.app_gray));
-        TextView tv = (TextView) rootView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView tv = rootView.findViewById(android.support.design.R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
         snackbar.setAction(android.R.string.yes, new View.OnClickListener() {
             @Override

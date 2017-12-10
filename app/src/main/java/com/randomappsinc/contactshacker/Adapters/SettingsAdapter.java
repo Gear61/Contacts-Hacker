@@ -10,13 +10,11 @@ import android.widget.TextView;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.randomappsinc.contactshacker.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by alexanderchiou on 5/20/16.
- */
 public class SettingsAdapter extends BaseAdapter {
+
     private String[] options;
     private String[] icons;
     private Context context;
@@ -43,8 +41,8 @@ public class SettingsAdapter extends BaseAdapter {
     }
 
     public class SettingsViewHolder {
-        @Bind(R.id.settings_icon) IconTextView icon;
-        @Bind(R.id.settings_option) TextView option;
+        @BindView(R.id.settings_icon) IconTextView icon;
+        @BindView(R.id.settings_option) TextView option;
 
         public SettingsViewHolder(View view) {
             ButterKnife.bind(this, view);

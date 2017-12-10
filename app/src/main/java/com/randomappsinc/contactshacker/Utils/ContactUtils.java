@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 
 import com.randomappsinc.contactshacker.Activities.MainActivity;
-import com.randomappsinc.contactshacker.Contact;
+import com.randomappsinc.contactshacker.Models.Contact;
 import com.randomappsinc.contactshacker.Models.ProgressEvent;
 import com.randomappsinc.contactshacker.Models.SnackbarEvent;
 import com.randomappsinc.contactshacker.R;
@@ -19,10 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class ContactUtils {
+
     public static void changeToOneName(String name) {
         List<String> singleName = new ArrayList<>();
         singleName.add(name);

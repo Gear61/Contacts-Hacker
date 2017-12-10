@@ -13,19 +13,18 @@ import com.randomappsinc.contactshacker.Utils.UIUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.OnClick;
 
-/**
- * Created by alexanderchiou on 5/22/16.
- */
 public class GrabBagActivity extends ChangingActivity {
+
     public static final String LOG_TAG = "GrabBagActivity";
 
-    @Bind(R.id.parent) View parent;
-    @Bind({R.id.name_1, R.id.name_2, R.id.name_3, R.id.name_4, R.id.name_5}) List<EditText> inputs;
+    @BindView(R.id.parent) View parent;
+    @BindViews({R.id.name_1, R.id.name_2, R.id.name_3, R.id.name_4, R.id.name_5}) List<EditText> inputs;
 
-    private List<String> grabBag;
+    private static List<String> grabBag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class GrabBagActivity extends ChangingActivity {
         }
     }
 
-    private class GrabBag extends AsyncTask<Void, Void, Void> {
+    private static class GrabBag extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             ContactUtils.changeContacts(grabBag, LOG_TAG);

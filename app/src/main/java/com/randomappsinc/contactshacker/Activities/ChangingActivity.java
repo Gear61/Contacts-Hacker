@@ -12,17 +12,15 @@ import com.randomappsinc.contactshacker.Utils.UIUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by alexanderchiou on 5/23/16.
- */
 public class ChangingActivity extends StandardActivity {
+
     protected String logTag;
     protected MaterialDialog progressDialog;
 
-    @Bind(R.id.parent) View parent;
+    @BindView(R.id.parent) View parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

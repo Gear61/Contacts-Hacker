@@ -17,7 +17,6 @@ public class UIUtils {
     public static void showSnackbar(View parent, String message) {
         Context context = MyApplication.getAppContext();
         Snackbar snackbar = Snackbar.make(parent, message, Snackbar.LENGTH_LONG);
-        View rootView = snackbar.getView();
         snackbar.getView().setBackgroundColor(context.getResources().getColor(R.color.app_gray));
         snackbar.show();
     }

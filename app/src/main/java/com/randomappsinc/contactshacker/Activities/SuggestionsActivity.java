@@ -2,8 +2,9 @@ package com.randomappsinc.contactshacker.Activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -46,13 +47,10 @@ public class SuggestionsActivity extends ChangingActivity {
                 .content(confirmationText)
                 .positiveText(android.R.string.yes)
                 .negativeText(android.R.string.no)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        progressDialog.setProgress(0);
-                        progressDialog.show();
-                        new GrabBag().execute();
-                    }
+                .onPositive((dialog, which) -> {
+                    progressDialog.setProgress(0);
+                    progressDialog.show();
+                    new GrabBag().execute();
                 })
                 .show();
     }
